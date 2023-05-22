@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import input.ShipCoordinates;
+import domain.ShipCoordinates;
 import ship.Ship;
 
 public class TestShipPositions {

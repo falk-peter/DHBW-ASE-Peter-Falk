@@ -1,6 +1,6 @@
 package shot;
 
-import input.ShotCoordinates;
+import domain.ShotCoordinates;
 
 public class Shot {
 	private int x;

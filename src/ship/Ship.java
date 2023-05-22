@@ -1,6 +1,6 @@
 package ship;
 
-import input.ShipCoordinates;
+import domain.ShipCoordinates;
 
 public class Ship {
 	private int startX;

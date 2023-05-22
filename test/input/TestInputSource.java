@@ -8,10 +8,14 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
+import adapters.InputConsole;
+import domain.ShipCoordinates;
+import domain.ShotCoordinates;
+
 public class TestInputSource {
 	@Test
 	public void testGetShipCoordinates() {
-		InputSource inputSource = new InputSource();
+		InputConsole inputSource = new InputConsole();
 		String input = "0 0 1 0";
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		Scanner scanner = new Scanner(in);
@@ -27,7 +31,7 @@ public class TestInputSource {
 
 	@Test
 	public void testTransformShipCoordinates() {
-		InputSource inputSource = new InputSource();
+		InputConsole inputSource = new InputConsole();
 		ShipCoordinates result = inputSource.transformShipCoordinates("0 0 1 0");
 
 		assertEquals(0, result.getX1());
@@ -38,7 +42,7 @@ public class TestInputSource {
 
 	@Test
 	public void testGetCordinatesForShot() {
-		InputSource inputSource = new InputSource();
+		InputConsole inputSource = new InputConsole();
 		String input = "0 1";
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		Scanner scanner = new Scanner(in);
@@ -52,7 +56,7 @@ public class TestInputSource {
 	
 	@Test
 	public void testTransformShotCoordinates() {
-		InputSource inputSource = new InputSource();
+		InputConsole inputSource = new InputConsole();
 		ShotCoordinates result = inputSource.transformShotCoordinates("4 5");
 
 		assertEquals(4, result.getX());

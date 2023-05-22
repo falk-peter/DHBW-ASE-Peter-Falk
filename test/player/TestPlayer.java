@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import input.ShipCoordinates;
-import input.ShotCoordinates;
+import domain.ShipCoordinates;
+import domain.ShotCoordinates;
 import ship.Ship;
 import shot.Shot;
 

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import domain.InputChecker;
+
 public class TestInputChecker {
 	@Test
 	public void testCheckLength() {

@@ -1,6 +1,6 @@
 package ship;
 
-import input.ShipCoordinates;
+import domain.ShipCoordinates;
 
 public class Submarine extends Ship{
 	int size = 2;

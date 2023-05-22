@@ -1,8 +1,8 @@
 package game;
 
-import input.InputSource;
-import input.ShipCoordinates;
-import input.ShotCoordinates;
+import domain.ShipCoordinates;
+import domain.ShotCoordinates;
+import interfaces.InputInterface;
 import player.Player;
 import ship.Battleship;
 import ship.Cruiser;
@@ -13,17 +13,18 @@ import shot.Shot;
 public class Game {
 	private Player playerA;
 	private Player playerB;
-	private InputSource inputSource;
 	private char playersTurn;
+	
+	private InputInterface input;
 
-	public Game() {
-		this.inputSource = new InputSource();
+	public Game(InputInterface input) {
+		this.input = input;
 	}
 
 	public void startGameSetUp() {
 		System.out.println("Let's play a game of sinking ships!");
 		System.out.println("Let's start with your both names!");
-		addPlayers(inputSource.getName(), inputSource.getName());
+		addPlayers(input.getName(), input.getName());
 
 		System.out.println("Alright! Let's continue with setting up your fleets! " + playerA.getName()
 				+ " is starting! " + playerB.getName() + " should not look at the screen!");
@@ -53,13 +54,13 @@ public class Game {
 
 		System.out.println("First, place a battleship with a size of five blocks!");
 		while (!successfullSetUp)
-			successfullSetUp = setUpBattleship(inputSource.getCoordinatesForShip(), player);
+			successfullSetUp = setUpBattleship(input.getCoordinatesForShip(), player);
 
 		successfullSetUp = false;
 
 		System.out.println("Now, set up one cruiser with a size of four blocks!");
 		while (!successfullSetUp)
-			successfullSetUp = setUpCruiser(inputSource.getCoordinatesForShip(), player);
+			successfullSetUp = setUpCruiser(input.getCoordinatesForShip(), player);
 
 		successfullSetUp = false;
 
@@ -104,7 +105,7 @@ public class Game {
 		int numberOfDestroyers = 0;
 
 		while (numberOfDestroyers < 2)
-			if (setUpDestroyer(inputSource.getCoordinatesForShip(), player))
+			if (setUpDestroyer(input.getCoordinatesForShip(), player))
 				numberOfDestroyers++;
 
 		return true;
@@ -127,7 +128,7 @@ public class Game {
 		int numberOfSubmarines = 0;
 
 		while (numberOfSubmarines < 2)
-			if (setUpSubmarine(inputSource.getCoordinatesForShip(), player))
+			if (setUpSubmarine(input.getCoordinatesForShip(), player))
 				numberOfSubmarines++;
 
 		return true;
@@ -177,7 +178,7 @@ public class Game {
 		boolean successfullTurn = false;
 		
 		while(!successfullTurn) {
-			ShotCoordinates shotCoordinates = inputSource.getCordinatesForShot();
+			ShotCoordinates shotCoordinates = input.getCordinatesForShot();
 			Shot shot = new Shot(shotCoordinates);
 			successfullTurn = player.addTry(shot);
 		}
@@ -220,14 +221,6 @@ public class Game {
 	 * set- and get-section
 	 */
 
-	public InputSource getInputSource() {
-		return inputSource;
-	}
-
-	public void setInputSource(InputSource inputSource) {
-		this.inputSource = inputSource;
-	}
-
 	public Player getPlayerA() {
 		return playerA;
 	}
@@ -247,5 +240,21 @@ public class Game {
 	private void clearConsole() {
 		for (int i = 0; i < 50; ++i)
 			System.out.println();
+	}
+
+	public char getPlayersTurn() {
+		return playersTurn;
+	}
+
+	public void setPlayersTurn(char playersTurn) {
+		this.playersTurn = playersTurn;
+	}
+
+	public InputInterface getInput() {
+		return input;
+	}
+
+	public void setInput(InputInterface input) {
+		this.input = input;
 	}
 }
