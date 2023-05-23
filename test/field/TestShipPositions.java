@@ -6,8 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import domain.Ship;
 import domain.ShipCoordinates;
-import ship.Ship;
+import domain.ShipPositions;
 
 public class TestShipPositions {
 	@Test

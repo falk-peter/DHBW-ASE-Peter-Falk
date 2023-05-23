@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import domain.BattlefieldDuringGame;
+
 public class TestBattlefieldDuringGame {
 	@Test
 	public void testBattlefieldDuringGame() {

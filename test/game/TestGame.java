@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import application.Game;
+import application.Player;
 import domain.ShipCoordinates;
-import player.Player;
 
 public class TestGame {
 	/*

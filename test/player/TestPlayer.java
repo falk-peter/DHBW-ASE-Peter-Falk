@@ -8,10 +8,11 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
+import application.Player;
+import domain.Ship;
 import domain.ShipCoordinates;
+import domain.Shot;
 import domain.ShotCoordinates;
-import ship.Ship;
-import shot.Shot;
 
 public class TestPlayer {
 	@Test

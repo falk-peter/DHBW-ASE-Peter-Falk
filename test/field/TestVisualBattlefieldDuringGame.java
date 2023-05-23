@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import adapters.VisualBattlefieldDuringGame;
+import domain.BattlefieldDuringGame;
+
 public class TestVisualBattlefieldDuringGame {
 	@Test
 	public void testVisualBattlefieldDuringGame() {
