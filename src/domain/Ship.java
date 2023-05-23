@@ -1,11 +1,12 @@
 package domain;
 
-public class Ship {
-	private int startX;
-	private int startY;
-	private int endX;
-	private int endY;
-	private ShipCoordinates coordinates;
+public abstract class Ship {
+	protected int startX;
+	protected int startY;
+	protected int endX;
+	protected int endY;
+	protected ShipCoordinates coordinates;
+	protected int size;
 
 	public Ship(ShipCoordinates coordinates) {
 		this.coordinates = coordinates;
@@ -13,7 +14,20 @@ public class Ship {
 		this.setStartY(coordinates.getY1());
 		this.setEndX(coordinates.getX2());
 		this.setEndY(coordinates.getY2());
+		calulateSize();
 	}
+	
+	public void calulateSize() {
+		int size_x = this.endX - this.startX;
+		int size_y = this.endY - this.endY;
+		
+		if  (size_x > size_y)	
+			size = size_x + 1;
+		else
+			size = size_y + 1;
+	}
+	
+	abstract boolean sizeCorrect();
 
 	public int getStartX() {
 		return startX;
