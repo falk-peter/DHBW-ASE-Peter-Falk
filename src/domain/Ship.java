@@ -27,7 +27,7 @@ public abstract class Ship {
 			size = size_y + 1;
 	}
 	
-	abstract boolean sizeCorrect();
+	public abstract boolean sizeCorrect();
 
 	public int getStartX() {
 		return startX;

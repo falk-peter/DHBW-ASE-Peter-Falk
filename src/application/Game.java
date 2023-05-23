@@ -3,7 +3,7 @@ package application;
 import domain.Battleship;
 import domain.Cruiser;
 import domain.Destroyer;
-import domain.ShipCoordinates;
+import domain.Ship;
 import domain.Shot;
 import domain.ShotCoordinates;
 import domain.Submarine;
@@ -72,7 +72,8 @@ public class Game {
 
 		while (!successfullSetUp) {
 			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
-			successfullSetUp = setUpBattleship(input.getCoordinatesForShip(), player);
+			Battleship battleship = new Battleship(input.getCoordinatesForShip());
+			successfullSetUp = setUpShip(battleship, player);
 		}
 
 		successfullSetUp = false;
@@ -80,7 +81,8 @@ public class Game {
 		output.printLine("Now, set up one cruiser with a size of four blocks!");
 		while (!successfullSetUp) {
 			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
-			successfullSetUp = setUpCruiser(input.getCoordinatesForShip(), player);
+			Cruiser cruiser = new Cruiser(input.getCoordinatesForShip());
+			successfullSetUp = setUpShip(cruiser, player);
 		}
 
 		successfullSetUp = false;
@@ -97,34 +99,17 @@ public class Game {
 			successfullSetUp = setUpSubmarines(player);
 	}
 
-	public boolean setUpBattleship(ShipCoordinates cordinatesOfBattleship, Player player) {
-		Battleship battleship = new Battleship(cordinatesOfBattleship);
-		if (!battleship.sizeCorrect()) {
+	public boolean setUpShip(Ship ship, Player player) {
+		if (!ship.sizeCorrect()) {
 			output.printLine("Error: Wrong size! Try again!");
 			return false;
 		}
-
-		if (!player.getShipPositions().isBlocked(battleship)) {
-			player.addShip(battleship);
-		} else
+		
+		if (!player.getShipPositions().isBlocked(ship)) {
+			player.addShip(ship);
+			return true;
+		} else 
 			return false;
-
-		return true;
-	}
-
-	public boolean setUpCruiser(ShipCoordinates coordinatesOfCruiser, Player player) {
-		Cruiser cruiser = new Cruiser(coordinatesOfCruiser);
-		if (!cruiser.sizeCorrect()) {
-			output.printLine("Error: Wrong size! Try again!");
-			return false;
-		}
-
-		if (!player.getShipPositions().isBlocked(cruiser))
-			player.addShip(cruiser);
-		else
-			return false;
-
-		return true;
 	}
 
 	public boolean setUpDestroyers(Player player) {
@@ -132,24 +117,10 @@ public class Game {
 
 		while (numberOfDestroyers < 2) {
 			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
-			if (setUpDestroyer(input.getCoordinatesForShip(), player))
+			Destroyer destroyer = new Destroyer(input.getCoordinatesForShip());
+			if (setUpShip(destroyer, player))
 				numberOfDestroyers++;
 		}
-
-		return true;
-	}
-
-	public boolean setUpDestroyer(ShipCoordinates coordinatesOfDestroyer, Player player) {
-		Destroyer destroyer = new Destroyer(coordinatesOfDestroyer);
-		if (!destroyer.sizeCorrect()) {
-			output.printLine("Error: Wrong size! Try again!");
-			return false;
-		}
-
-		if (!player.getShipPositions().isBlocked(destroyer))
-			player.addShip(destroyer);
-		else
-			return false;
 
 		return true;
 	}
@@ -159,24 +130,10 @@ public class Game {
 
 		while (numberOfSubmarines < 2) {
 			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
-			if (setUpSubmarine(input.getCoordinatesForShip(), player))
+			Submarine submarine = new Submarine(input.getCoordinatesForShip());
+			if (setUpShip(submarine, player))
 				numberOfSubmarines++;
 		}
-
-		return true;
-	}
-
-	public boolean setUpSubmarine(ShipCoordinates cordinatesOfSubmarine, Player player) {
-		Submarine submarine = new Submarine(cordinatesOfSubmarine);
-		if (!submarine.sizeCorrect()) {
-			output.printLine("Error: Wrong size! Try again!");
-			return false;
-		}
-
-		if (!player.getShipPositions().isBlocked(submarine))
-			player.addShip(submarine);
-		else
-			return false;
 
 		return true;
 	}
@@ -187,7 +144,6 @@ public class Game {
 
 		while (!gameFinished) {
 			if (playersTurn == 'A') {
-				System.out.println("DEBUG: Turn of player A");
 				output.printLine(playerA.getName() + "'s turn!");
 				commitTurnOn(playerB);
 			} else {
