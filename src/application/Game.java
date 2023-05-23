@@ -8,6 +8,7 @@ import domain.Shot;
 import domain.ShotCoordinates;
 import domain.Submarine;
 import interfaces.InputInterface;
+import interfaces.OutputInterface;
 import interfaces.VisualBattlefieldInterface;
 import interfaces.VisualShipPositionsInterface;
 
@@ -15,66 +16,83 @@ public class Game {
 	private Player playerA;
 	private Player playerB;
 	private char playersTurn;
-	
-	private InputInterface input;
 
-	public Game(InputInterface input, VisualShipPositionsInterface visualShipPositions1, VisualShipPositionsInterface visualShipPositions2, VisualBattlefieldInterface visualBattlefield1, VisualBattlefieldInterface visualBattlefield2) {
+	private InputInterface input;
+	private OutputInterface output;
+
+	public Game(OutputInterface output, InputInterface input, VisualShipPositionsInterface visualShipPositions1,
+			VisualShipPositionsInterface visualShipPositions2, VisualBattlefieldInterface visualBattlefield1,
+			VisualBattlefieldInterface visualBattlefield2) {
+		this.output = output;
 		this.input = input;
 		this.playerA = new Player("PlayerA", visualShipPositions1, visualBattlefield1);
 		this.playerB = new Player("PlayerB", visualShipPositions2, visualBattlefield2);
 	}
 
-	public void startGameSetUp() {
-		System.out.println("Let's play a game of sinking ships!");
-		System.out.println("Let's start with your both names!");
-		addPlayers(input.getName(), input.getName());
+	public void setUpGame() {
+		output.printLine("Let's play a game of sinking ships!");
+		output.printLine("Let's start with your both names!");
 
-		System.out.println("Alright! Let's continue with setting up your fleets! " + playerA.getName()
-				+ " is starting! " + playerB.getName() + " should not look at the screen!");
-		setUpShips(playerA);
+		setUpPlayerNames();
+		setUpShips();
 
-		clearConsole();
+		output.clear();
 
-		System.out.println("That's it for " + playerA.getName() + "! Change player to set up the fleet of "
-				+ playerB.getName() + "!");
-		setUpShips(playerB);
-
-		clearConsole();
-
-		System.out.println("Both players have successfully placed all their ships! Let's start the game!");
-		System.out.println("Every turn each player gets one shot until one of you destroyed all ships!");
+		output.printLine("Both players have successfully placed all their ships! Let's start the game!");
+		output.printLine("Every turn each player gets one shot until one of you destroyed all ships!");
 		startGame();
 	}
 
-	public void addPlayers(String nameA, String nameB) {
-		playerA.setName(nameA);
-		playerB.setName(nameB);
+	public void setUpPlayerNames() {
+		output.printLine("Enter your name Player A:");
+		playerA.setName(input.getName());
+		output.printLine("Enter your name Player B:");
+		playerB.setName(input.getName());
 	}
 
-	public void setUpShips(Player player) {
+	public void setUpShips() {
+		output.printLine("Alright! Let's continue with setting up your fleets! " + playerA.getName() + " is starting! "
+				+ playerB.getName() + " should not look at the screen!");
+		setUpShipsFor(playerA);
+
+		output.clear();
+
+		output.printLine("That's it for " + playerA.getName() + "! Change player to set up the fleet of "
+				+ playerB.getName() + "!");
+		setUpShipsFor(playerB);
+
+		output.clear();
+	}
+
+	public void setUpShipsFor(Player player) {
 		boolean successfullSetUp = false;
 
-		System.out.println("First, place a battleship with a size of five blocks!");
+		output.printLine("First, place a battleship with a size of five blocks!");
 		player.getShipPositions().print();
-		
-		while (!successfullSetUp)
+
+		while (!successfullSetUp) {
+			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
 			successfullSetUp = setUpBattleship(input.getCoordinatesForShip(), player);
+		}
 
 		successfullSetUp = false;
 
-		System.out.println("Now, set up one cruiser with a size of four blocks!");
-		while (!successfullSetUp)
+		output.printLine("Now, set up one cruiser with a size of four blocks!");
+		while (!successfullSetUp) {
+			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
 			successfullSetUp = setUpCruiser(input.getCoordinatesForShip(), player);
+		}
 
 		successfullSetUp = false;
 
-		System.out.println("Next, place two destroyers of size 3.");
-		while (!successfullSetUp)
+		output.printLine("Next, place two destroyers of size 3.");
+		while (!successfullSetUp) {
 			successfullSetUp = setUpDestroyers(player);
+		}
 
 		successfullSetUp = false;
 
-		System.out.println("Finally, place two submarines of size 2.");
+		output.printLine("Finally, place two submarines of size 2.");
 		while (!successfullSetUp)
 			successfullSetUp = setUpSubmarines(player);
 	}
@@ -108,9 +126,11 @@ public class Game {
 	public boolean setUpDestroyers(Player player) {
 		int numberOfDestroyers = 0;
 
-		while (numberOfDestroyers < 2)
+		while (numberOfDestroyers < 2) {
+			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
 			if (setUpDestroyer(input.getCoordinatesForShip(), player))
 				numberOfDestroyers++;
+		}
 
 		return true;
 	}
@@ -131,9 +151,11 @@ public class Game {
 	public boolean setUpSubmarines(Player player) {
 		int numberOfSubmarines = 0;
 
-		while (numberOfSubmarines < 2)
+		while (numberOfSubmarines < 2) {
+			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
 			if (setUpSubmarine(input.getCoordinatesForShip(), player))
 				numberOfSubmarines++;
+		}
 
 		return true;
 	}
@@ -157,10 +179,11 @@ public class Game {
 
 		while (!gameFinished) {
 			if (playersTurn == 'A') {
-				System.out.println(playerA.getName() + "'s turn!");
+				System.out.println("DEBUG: Turn of player A");
+				output.printLine(playerA.getName() + "'s turn!");
 				commitTurnOn(playerB);
 			} else {
-				System.out.println(playerB.getName() + "'s turn!");
+				output.printLine(playerB.getName() + "'s turn!");
 				commitTurnOn(playerA);
 			}
 
@@ -169,7 +192,7 @@ public class Game {
 			else {
 				changeTurn();
 				for (int i = 0; i < 5; ++i)
-					System.out.println();
+					output.printLine("");
 			}
 		}
 
@@ -178,18 +201,23 @@ public class Game {
 
 	public void commitTurnOn(Player player) {
 		player.getBattlefieldDuringGame().print();
-		
+
 		boolean successfullTurn = false;
-		
-		while(!successfullTurn) {
+
+		while (!successfullTurn) {
+			output.printLine("Enter the desired coordinates in format: x y");
 			ShotCoordinates shotCoordinates = input.getCordinatesForShot();
 			Shot shot = new Shot(shotCoordinates);
 			successfullTurn = player.addTry(shot);
+
+			if (successfullTurn == false) {
+				output.printLine("Already shot there! Try again with new cooridnates!");
+			}
 		}
 	}
 
 	public void endGame() {
-		System.out.println("The game is over!");
+		output.printLine("The game is over!");
 		String winner;
 
 		if (playersTurn == 'A')
@@ -197,7 +225,7 @@ public class Game {
 		else
 			winner = playerB.getName();
 
-		System.out.println("Congratulation " + winner + "! You have won!");
+		output.printLine("Congratulation " + winner + "! You have won!");
 	}
 
 	public boolean gameIsOver() {
@@ -239,11 +267,6 @@ public class Game {
 
 	public void setPlayerB(Player playerB) {
 		this.playerB = playerB;
-	}
-
-	private void clearConsole() {
-		for (int i = 0; i < 50; ++i)
-			System.out.println();
 	}
 
 	public char getPlayersTurn() {

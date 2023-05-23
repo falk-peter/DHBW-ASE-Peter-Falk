@@ -17,12 +17,10 @@ public class InputConsole implements InputInterface {
 	}
 
 	public String getName() {
-		System.out.println("Enter your name:");
 		return scanner.nextLine();
 	}
 
 	public ShipCoordinates getCoordinatesForShip() {
-		System.out.println("Enter the desired coordinates in format: startX startY endX endY");
 		String input = scanner.nextLine();
 
 		if (inputChecker.checkShipCoordinates(input)) {
@@ -44,7 +42,6 @@ public class InputConsole implements InputInterface {
 	} 
 
 	public ShotCoordinates getCordinatesForShot() {
-		System.out.println("Enter the desired coordinates in format: x y");
 		String input = scanner.nextLine();
 
 		if (inputChecker.checkShotCoordinates(input)) {

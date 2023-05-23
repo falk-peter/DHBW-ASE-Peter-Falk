@@ -12,33 +12,31 @@ public class Player {
 	private BattlefieldDuringGame battlefieldDuringGame;
 	private ShipPositions shipPositions;
 
-	public Player(String name, VisualShipPositionsInterface visualShipPositions, VisualBattlefieldInterface visualBattlefield) {
+	public Player(String name, VisualShipPositionsInterface visualShipPositions,
+			VisualBattlefieldInterface visualBattlefield) {
 		this.name = name;
 		this.battlefieldDuringGame = new BattlefieldDuringGame(visualBattlefield);
 		this.shipPositions = new ShipPositions(visualShipPositions);
 	}
 
 	public boolean addShip(Ship ship) {
-		if (shipPositions.addShip(ship)) {
+		if (shipPositions.addShip(ship))
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public boolean addTry(Shot shot) {
 		if (battlefieldDuringGame.alreadyTried(shot.getX(), shot.getY())) {
-			System.out.println("Already shot there! Try again with new cooridnates!");
 			return false;
 		}
-		
+
 		if (shipPositions.isHit(shot.getX(), shot.getY())) {
 			battlefieldDuringGame.updateWithShot(shot.getX(), shot.getY(), 'X');
-		}
-		else {
+		} else {
 			battlefieldDuringGame.updateWithShot(shot.getX(), shot.getY(), 'O');
 		}
-		
+
 		return true;
 	}
 
