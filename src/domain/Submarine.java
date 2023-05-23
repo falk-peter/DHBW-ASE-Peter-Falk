@@ -6,7 +6,7 @@ public class Submarine extends Ship{
 	}
 
 	@Override
-	boolean sizeCorrect() {
+	public boolean sizeCorrect() {
 		return (size == 2);
 	}
 }

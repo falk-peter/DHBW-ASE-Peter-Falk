@@ -98,10 +98,12 @@ public class Game {
 	}
 
 	public boolean setUpBattleship(ShipCoordinates cordinatesOfBattleship, Player player) {
-		if (!cordinatesOfBattleship.checkIfSizeCorrect(5))
-			return false;
-
 		Battleship battleship = new Battleship(cordinatesOfBattleship);
+		if (!battleship.sizeCorrect()) {
+			output.printLine("Error: Wrong size! Try again!");
+			return false;
+		}
+
 		if (!player.getShipPositions().isBlocked(battleship)) {
 			player.addShip(battleship);
 		} else
@@ -111,10 +113,12 @@ public class Game {
 	}
 
 	public boolean setUpCruiser(ShipCoordinates coordinatesOfCruiser, Player player) {
-		if (!coordinatesOfCruiser.checkIfSizeCorrect(4))
-			return false;
-
 		Cruiser cruiser = new Cruiser(coordinatesOfCruiser);
+		if (!cruiser.sizeCorrect()) {
+			output.printLine("Error: Wrong size! Try again!");
+			return false;
+		}
+
 		if (!player.getShipPositions().isBlocked(cruiser))
 			player.addShip(cruiser);
 		else
@@ -136,10 +140,12 @@ public class Game {
 	}
 
 	public boolean setUpDestroyer(ShipCoordinates coordinatesOfDestroyer, Player player) {
-		if (!coordinatesOfDestroyer.checkIfSizeCorrect(3))
-			return false;
-
 		Destroyer destroyer = new Destroyer(coordinatesOfDestroyer);
+		if (!destroyer.sizeCorrect()) {
+			output.printLine("Error: Wrong size! Try again!");
+			return false;
+		}
+
 		if (!player.getShipPositions().isBlocked(destroyer))
 			player.addShip(destroyer);
 		else
@@ -161,10 +167,12 @@ public class Game {
 	}
 
 	public boolean setUpSubmarine(ShipCoordinates cordinatesOfSubmarine, Player player) {
-		if (!cordinatesOfSubmarine.checkIfSizeCorrect(2))
-			return false;
-
 		Submarine submarine = new Submarine(cordinatesOfSubmarine);
+		if (!submarine.sizeCorrect()) {
+			output.printLine("Error: Wrong size! Try again!");
+			return false;
+		}
+
 		if (!player.getShipPositions().isBlocked(submarine))
 			player.addShip(submarine);
 		else

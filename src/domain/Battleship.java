@@ -6,7 +6,7 @@ public class Battleship extends Ship {
 	}
 	
 	@Override
-	boolean sizeCorrect() {
+	public boolean sizeCorrect() {
 		return (size == 5);
 	}
 }

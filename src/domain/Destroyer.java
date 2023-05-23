@@ -6,7 +6,7 @@ public class Destroyer extends Ship {
 	}
 	
 	@Override
-	boolean sizeCorrect() {
+	public boolean sizeCorrect() {
 		return (size == 3);
 	}
 }
