@@ -6,15 +6,6 @@ public class ShipCoordinates {
 	public ShipCoordinates() {
 	}
 
-	public boolean checkIfSizeCorrect(int i) {
-		if (x2 - x1 == (i - 1) || y2 - y1 == (i - 1))
-			return true;
-		else {
-			System.out.println("Error: Incorrect size of ship! Must be " + i + "!");
-			return false;
-		}
-	}
-
 	public int getX1() {
 		return x1;
 	}
