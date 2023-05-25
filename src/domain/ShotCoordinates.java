@@ -2,8 +2,9 @@ package domain;
 
 import java.util.Objects;
 
-public class ShotCoordinates {
-	private int x, y;
+public final class ShotCoordinates {
+	private final int x;
+	private final int y;
 
 	public ShotCoordinates(int x, int y) {
 		this.x = x;
