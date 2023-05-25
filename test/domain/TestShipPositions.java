@@ -107,8 +107,8 @@ public class TestShipPositions {
 
 		boolean[][] result = shipPositions.getBlockedFields();
 
-		for (int y = ship1.getStartY() - 1; y <= ship1.getEndY() + 1; y++) {
-			for (int x = ship1.getStartX() - 1; x <= ship1.getEndX(); x++) {
+		for (int y = ship1.getCoordinates().getY1() - 1; y <= ship1.getCoordinates().getY2() + 1; y++) {
+			for (int x = ship1.getCoordinates().getX1() - 1; x <= ship1.getCoordinates().getX2(); x++) {
 				assertEquals(true, result[y][x]);
 			}
 		}
@@ -126,8 +126,8 @@ public class TestShipPositions {
 
 		result = shipPositions.getBlockedFields();
 
-		for (int y = ship2.getStartY(); y <= ship2.getEndY() + 1; y++) {
-			for (int x = ship2.getStartX(); x <= ship2.getEndX() + 1; x++) {
+		for (int y = ship2.getCoordinates().getY1(); y <= ship2.getCoordinates().getY2() + 1; y++) {
+			for (int x = ship2.getCoordinates().getX1(); x <= ship2.getCoordinates().getX2() + 1; x++) {
 				assertEquals(true, result[y][x]);
 			}
 		}

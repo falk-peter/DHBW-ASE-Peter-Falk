@@ -5,6 +5,8 @@ public class ShipCoordinates {
 
 	public ShipCoordinates() {
 	}
+	
+	
 
 	public int getX1() {
 		return x1;

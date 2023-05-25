@@ -54,8 +54,8 @@ public class ShipPositions {
 	}
 
 	public boolean isBlocked(Ship ship) {
-		for (int y = ship.getStartY(); y <= ship.getEndY(); y++) {
-			for (int x = ship.getStartX(); x <= ship.getEndX(); x++) {
+		for (int y = ship.getCoordinates().getY1(); y <= ship.getCoordinates().getY2(); y++) {
+			for (int x = ship.getCoordinates().getX1(); x <= ship.getCoordinates().getX2(); x++) {
 				if (blockedFields[y][x] == true) {
 					System.out.println("Error: (" + x + "/" + y + ") is already blocked by another ship!") ;
 					return true;
@@ -66,35 +66,35 @@ public class ShipPositions {
 	}
 
 	public void updateBlockedFields(Ship ship) {
-		for (int y = ship.getStartY(); y <= ship.getEndY(); y++) {
-			for (int x = ship.getStartX(); x <= ship.getEndX(); x++) {
+		for (int y = ship.getCoordinates().getY1(); y <= ship.getCoordinates().getY2(); y++) {
+			for (int x = ship.getCoordinates().getX1(); x <= ship.getCoordinates().getX2(); x++) {
 				blockedFields[y][x] = true;
 
-				if (ship.getStartY() != 0)
+				if (ship.getCoordinates().getY1() != 0)
 					blockedFields[y - 1][x] = true;
 
-				if (ship.getEndY() != 9)
+				if (ship.getCoordinates().getY2() != 9)
 					blockedFields[y + 1][x] = true;
 
-				if (ship.getStartX() != 0)
+				if (ship.getCoordinates().getX1() != 0)
 					blockedFields[y][x - 1] = true;
 
-				if (ship.getEndX() != 9)
+				if (ship.getCoordinates().getX2() != 9)
 					blockedFields[y][x + 1] = true;
 
-				if (ship.getStartX() != 0 && ship.getStartY() != 0) {
+				if (ship.getCoordinates().getX1() != 0 && ship.getCoordinates().getY1() != 0) {
 					blockedFields[y - 1][x - 1] = true;
 				}
 
-				if (ship.getEndX() != 9 && ship.getStartY() != 0) {
+				if (ship.getCoordinates().getX2() != 9 && ship.getCoordinates().getY1() != 0) {
 					blockedFields[y - 1][x + 1] = true;
 				}
 
-				if (ship.getStartX() != 0 && ship.getEndY() != 9) {
+				if (ship.getCoordinates().getX1() != 0 && ship.getCoordinates().getY2() != 9) {
 					blockedFields[y + 1][x - 1] = true;
 				}
 
-				if (ship.getEndX() != 9 && ship.getEndY() != 9) {
+				if (ship.getCoordinates().getX2() != 9 && ship.getCoordinates().getY2() != 9) {
 					blockedFields[y + 1][x + 1] = true;
 				}
 			}
@@ -103,8 +103,8 @@ public class ShipPositions {
 	}
 
 	public void updateShipPositions(Ship ship) {
-		for (int y = ship.getStartY(); y <= ship.getEndY(); y++) {
-			for (int x = ship.getStartX(); x <= ship.getEndX(); x++) {
+		for (int y = ship.getCoordinates().getY1(); y <= ship.getCoordinates().getY2(); y++) {
+			for (int x = ship.getCoordinates().getX1(); x <= ship.getCoordinates().getX2(); x++) {
 				positionOfShips[y][x] = 'S';
 			}
 		}

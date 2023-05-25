@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="DE"/>
     <property name="sun.boot.library.path" value="C:\Users\Peter Falk\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.1.v20201027-0507\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\Peter Falk\AppData\Local\Temp\surefire12141305234047713453\surefirebooter9956700847995487590.jar C:\Users\Peter Falk\AppData\Local\Temp\surefire12141305234047713453 2023-05-24T20-07-24_257-jvmRun1 surefire11851975843549781565tmp surefire_04038037177222759879tmp"/>
+    <property name="sun.java.command" value="C:\Users\Peter Falk\AppData\Local\Temp\surefire6294618164672661170\surefirebooter14541546447920116927.jar C:\Users\Peter Falk\AppData\Local\Temp\surefire6294618164672661170 2023-05-25T10-45-42_434-jvmRun1 surefire2015742324095798996tmp surefire_011175713942165533214tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Peter Falk\Workspaces\SchiffeVersenken\SchiffeVersenken\target\test-classes;C:\Users\Peter Falk\Workspaces\SchiffeVersenken\SchiffeVersenken\target\classes;C:\Users\Peter Falk\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\Peter Falk\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Peter Falk\AppData\Local\Temp\surefire12141305234047713453\surefirebooter9956700847995487590.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Peter Falk\AppData\Local\Temp\surefire6294618164672661170\surefirebooter14541546447920116927.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15.0.1+9-18"/>
@@ -68,7 +68,7 @@ Ship is blocked! Try again!
     <system-out><![CDATA[Error: (0/0) is already blocked by another ship!
 ]]></system-out>
   </testcase>
-  <testcase name="testAddShipSuccess" classname="domain.TestShipPositions" time="0.004">
+  <testcase name="testAddShipSuccess" classname="domain.TestShipPositions" time="0.006">
     <system-out><![CDATA[* * * * * * * * * * * * * * *
 *              x            *
 *     0 1 2 3 4 5 6 7 8 9   *
@@ -86,7 +86,7 @@ Ship is blocked! Try again!
 * * * * * * * * * * * * * * *
 ]]></system-out>
   </testcase>
-  <testcase name="testUpdateBlockedFields" classname="domain.TestShipPositions" time="0.001">
+  <testcase name="testUpdateBlockedFields" classname="domain.TestShipPositions" time="0">
     <system-out><![CDATA[
 ]]></system-out>
   </testcase>

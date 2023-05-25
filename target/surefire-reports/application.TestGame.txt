@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: application.TestGame
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 s - in application.TestGame
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s - in application.TestGame
