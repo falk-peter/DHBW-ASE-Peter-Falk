@@ -16,6 +16,6 @@ public class Destroyer extends Ship {
 		else
 			size = size_y;
 
-		return ((size++) == 3);
+		return (size == 2);
 	}
 }

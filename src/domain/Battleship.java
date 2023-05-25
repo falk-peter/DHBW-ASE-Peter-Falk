@@ -16,6 +16,6 @@ public class Battleship extends Ship {
 		else
 			size = size_y;
 
-		return ((size++) == 5);
+		return (size == 4);
 	}
 }

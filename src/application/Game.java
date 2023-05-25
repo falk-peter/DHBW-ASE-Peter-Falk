@@ -33,8 +33,8 @@ public class Game {
 		output.printLine("Let's play a game of sinking ships!");
 		output.printLine("Let's start with your both names!");
 
-		setUpPlayerNames();
-		setUpShips();
+		setUpPlayersWithNames();
+		setUpShipsForBothPlayers();
 
 		output.clear();
 
@@ -43,14 +43,14 @@ public class Game {
 		startGame();
 	}
 
-	public void setUpPlayerNames() {
+	public void setUpPlayersWithNames() {
 		output.printLine("Enter your name Player A:");
 		playerA.setName(input.getName());
 		output.printLine("Enter your name Player B:");
 		playerB.setName(input.getName());
 	}
 
-	public void setUpShips() {
+	public void setUpShipsForBothPlayers() {
 		output.printLine("Alright! Let's continue with setting up your fleets! " + playerA.getName() + " is starting! "
 				+ playerB.getName() + " should not look at the screen!");
 		setUpShipsFor(playerA);
@@ -65,77 +65,65 @@ public class Game {
 	}
 
 	public void setUpShipsFor(Player player) {
-		boolean successfullSetUp = false;
-
-		output.printLine("First, place a battleship with a size of five blocks!");
 		player.getShipPositions().print();
-
-		while (!successfullSetUp) {
-			output.askForShipCoordinates();
-			Battleship battleship = new Battleship(input.getCoordinatesForShip());
-			successfullSetUp = setUpShip(battleship, player);
-		}
-
-		successfullSetUp = false;
-
+		output.printLine("First, place a battleship with a size of five blocks!");
+		setUpBattleshipFor(player);
+		
 		output.printLine("Now, set up one cruiser with a size of four blocks!");
-		while (!successfullSetUp) {
-			output.askForShipCoordinates();
-			Cruiser cruiser = new Cruiser(input.getCoordinatesForShip());
-			successfullSetUp = setUpShip(cruiser, player);
-		}
-
-		successfullSetUp = false;
-
+		setUpCruiserFor(player);
+		
 		output.printLine("Next, place two destroyers of size 3.");
-		while (!successfullSetUp) {
-			successfullSetUp = setUpDestroyers(player);
-		}
-
-		successfullSetUp = false;
-
+		setUpDestroyersFor(player);
+		
 		output.printLine("Finally, place two submarines of size 2.");
-		while (!successfullSetUp)
-			successfullSetUp = setUpSubmarines(player);
+		setUpSubmarinesFor(player);
 	}
 
-	public boolean setUpShip(Ship ship, Player player) {
+	public void setUpBattleshipFor(Player player) {
+		output.askForShipCoordinates();
+		Battleship battleship = new Battleship(input.getCoordinatesForShip());
+		if (!tryAddShipToPlayer(battleship, player))
+			setUpBattleshipFor(player);
+	}
+
+	public void setUpCruiserFor(Player player) {
+		output.askForShipCoordinates();
+		Cruiser cruiser = new Cruiser(input.getCoordinatesForShip());
+		if (!tryAddShipToPlayer(cruiser, player))
+			setUpBattleshipFor(player);
+	}
+	
+	public void setUpDestroyersFor(Player player) {
+		int numberOfDestroyers = 0;
+		while (numberOfDestroyers < 2) {
+			output.askForShipCoordinates();
+			Destroyer destroyer = new Destroyer(input.getCoordinatesForShip());
+			if (tryAddShipToPlayer(destroyer, player))
+				numberOfDestroyers++;
+		}
+	}
+	
+	public void setUpSubmarinesFor(Player player) {
+		int numberOfSubmarines = 0;
+		while (numberOfSubmarines < 2) {
+			output.askForShipCoordinates();
+			Submarine submarine = new Submarine(input.getCoordinatesForShip());
+			if (tryAddShipToPlayer(submarine, player))
+				numberOfSubmarines++;
+		}
+	}
+
+	public boolean tryAddShipToPlayer(Ship ship, Player player) {
 		if (!ship.sizeCorrect()) {
 			output.printLine("Error: Wrong size! Try again!");
 			return false;
 		}
-		
+
 		if (!player.getShipPositions().isBlocked(ship)) {
 			player.addShip(ship);
 			return true;
-		} else 
+		} else
 			return false;
-	}
-
-	public boolean setUpDestroyers(Player player) {
-		int numberOfDestroyers = 0;
-
-		while (numberOfDestroyers < 2) {
-			output.askForShipCoordinates();
-			Destroyer destroyer = new Destroyer(input.getCoordinatesForShip());
-			if (setUpShip(destroyer, player))
-				numberOfDestroyers++;
-		}
-
-		return true;
-	}
-
-	public boolean setUpSubmarines(Player player) {
-		int numberOfSubmarines = 0;
-
-		while (numberOfSubmarines < 2) {
-			output.askForShipCoordinates();
-			Submarine submarine = new Submarine(input.getCoordinatesForShip());
-			if (setUpShip(submarine, player))
-				numberOfSubmarines++;
-		}
-
-		return true;
 	}
 
 	public void startGame() {
@@ -183,7 +171,7 @@ public class Game {
 	public void endGame() {
 		output.printLine("The game is over!");
 		String winner;
- 
+
 		if (playersTurn == 'A')
 			winner = playerA.getName();
 		else

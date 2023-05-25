@@ -16,7 +16,6 @@ public class Submarine extends Ship{
 		else
 			size = size_y;
 
-		size++;
-		return (size == 2);
+		return (size == 1);
 	}
 }

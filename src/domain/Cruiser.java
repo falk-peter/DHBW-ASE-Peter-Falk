@@ -16,6 +16,6 @@ public class Cruiser extends Ship {
 		else
 			size = size_y;
 
-		return ((size++) == 4);
+		return (size == 3);
 	}
 }

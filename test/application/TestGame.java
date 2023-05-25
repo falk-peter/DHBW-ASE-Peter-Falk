@@ -31,7 +31,7 @@ public class TestGame {
 		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
-		boolean testMethod = testGame.setUpShip(ship, testPlayer);
+		boolean testMethod = testGame.tryAddShipToPlayer(ship, testPlayer);
 		boolean[][] result = testPlayer.getShipPositions().getBlockedFields();
 
 		assertEquals(true, testMethod);
@@ -43,7 +43,7 @@ public class TestGame {
 		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 2, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
-		assertEquals(false, testGame.setUpShip(ship, testPlayer));
+		assertEquals(false, testGame.tryAddShipToPlayer(ship, testPlayer));
 	}
 
 	@Test
@@ -55,6 +55,6 @@ public class TestGame {
 		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
-		assertEquals(false, testGame.setUpShip(ship, testPlayer));
+		assertEquals(false, testGame.tryAddShipToPlayer(ship, testPlayer));
 	}
 }
