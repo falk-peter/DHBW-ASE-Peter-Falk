@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: application.TestPlayer
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s - in application.TestPlayer
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.024 s <<< FAILURE! - in application.TestPlayer
+application.TestPlayer.testAddTryTriedAlready  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "interfaces.VisualBattlefieldInterface.update(domain.BattlefieldDuringGame)" because "this.visualBattlefield" is null
+	at application.TestPlayer.testAddTryTriedAlready(TestPlayer.java:94)
+

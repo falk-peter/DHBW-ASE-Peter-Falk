@@ -11,13 +11,13 @@ import adapters.VisualShipPositionsDuringSetUp;
 
 public class TestShipPositions {
 	ShipPositions shipPositions;
-	
+
 	@Before
 	public void setUp() {
 		VisualShipPositionsDuringSetUp visual = new VisualShipPositionsDuringSetUp();
 		shipPositions = new ShipPositions(visual);
 	}
-	
+
 	@Test
 	public void testShipPositions() {
 		char[][] resultShipPositions = shipPositions.getPositionOfShips();
@@ -31,26 +31,14 @@ public class TestShipPositions {
 
 	@Test
 	public void testIsNotBlocked() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setY2(0);
-
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 		assertFalse(shipPositions.isBlocked(ship));
 	}
 
 	@Test
 	public void testIsBlocked() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setY2(0);
-
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		boolean[][] blockedFields = shipPositions.getBlockedFields();
 		blockedFields[0][0] = true;
 
@@ -60,12 +48,7 @@ public class TestShipPositions {
 
 	@Test
 	public void testUpdateShipPositionsForHorizontalShip() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setY2(0);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 		shipPositions.updateShipPositions(ship);
 
@@ -77,12 +60,7 @@ public class TestShipPositions {
 
 	@Test
 	public void testUpdateShipPositionsForVerticalShip() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(0);
-		shipCoordinates.setX2(0);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setY2(1);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 0, 1);
 		Ship ship = new Submarine(shipCoordinates);
 
 		shipPositions.updateShipPositions(ship);
@@ -95,12 +73,7 @@ public class TestShipPositions {
 
 	@Test
 	public void testUpdateBlockedFields() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(4);
-		shipCoordinates.setX2(5);
-		shipCoordinates.setY1(2);
-		shipCoordinates.setY2(2);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(4, 2, 5, 2);
 		Ship ship1 = new Submarine(shipCoordinates);
 
 		shipPositions.updateBlockedFields(ship1);
@@ -113,14 +86,8 @@ public class TestShipPositions {
 			}
 		}
 
-		System.out.println();
-
-		shipCoordinates.setX1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setY2(0);
-
-		Ship ship2 = new Submarine(shipCoordinates);
+		ShipCoordinates shipCoordinates2 = new ShipCoordinates(0, 0, 1, 0);
+		Ship ship2 = new Submarine(shipCoordinates2);
 
 		shipPositions.updateBlockedFields(ship2);
 
@@ -135,12 +102,7 @@ public class TestShipPositions {
 
 	@Test
 	public void testAddShipSuccess() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(4);
-		shipCoordinates.setX2(5);
-		shipCoordinates.setY1(2);
-		shipCoordinates.setY2(2);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(4, 2, 5, 2);
 		Ship ship1 = new Submarine(shipCoordinates);
 
 		assertEquals(true, shipPositions.addShip(ship1));
@@ -148,12 +110,7 @@ public class TestShipPositions {
 
 	@Test
 	public void testAddShipFailBecauseOfBlock() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-
-		shipCoordinates.setX1(4);
-		shipCoordinates.setX2(5);
-		shipCoordinates.setY1(2);
-		shipCoordinates.setY2(2);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(4, 2, 5, 2);
 		Ship ship1 = new Submarine(shipCoordinates);
 
 		boolean[][] blockedFields = shipPositions.getBlockedFields();
@@ -167,13 +124,13 @@ public class TestShipPositions {
 	public void testIsNotAHit() {
 		assertEquals(false, shipPositions.isHit(5, 5));
 	}
-	
+
 	@Test
 	public void testIsHot() {
 		char shipPositionsArray[][] = shipPositions.getPositionOfShips();
 		shipPositionsArray[5][5] = 'S';
 		shipPositions.setPositionOfShips(shipPositionsArray);
-		
+
 		assertEquals(true, shipPositions.isHit(5, 5));
 	}
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: domain.TestBattlefieldDuringGame
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in domain.TestBattlefieldDuringGame
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s - in domain.TestBattlefieldDuringGame

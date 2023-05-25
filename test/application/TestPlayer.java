@@ -15,20 +15,17 @@ import domain.Submarine;
 
 public class TestPlayer {
 	Player testPlayer;
+
 	@Before
 	public void setUp() {
 		VisualShipPositionsDuringSetUp positions = new VisualShipPositionsDuringSetUp();
 		VisualBattlefieldDuringGame battlefield = new VisualBattlefieldDuringGame();
 		testPlayer = new Player("Test", positions, battlefield);
 	}
-	
+
 	@Test
 	public void testAddShip() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(5);
-		shipCoordinates.setX2(6);
-		shipCoordinates.setY1(5);
-		shipCoordinates.setY2(5);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(5, 5, 6, 5);
 		Submarine ship = new Submarine(shipCoordinates);
 
 		assertEquals(true, testPlayer.addShip(ship));
@@ -37,45 +34,29 @@ public class TestPlayer {
 	@Test
 	public void testAddShipTouching() {
 
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(5);
-		shipCoordinates.setX2(6);
-		shipCoordinates.setY1(5);
-		shipCoordinates.setY2(5);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(5, 5, 6, 5);
 		Ship ship1 = new Submarine(shipCoordinates);
 		assertEquals(true, testPlayer.addShip(ship1));
 
-		shipCoordinates.setX1(5);
-		shipCoordinates.setX2(6);
-		shipCoordinates.setY1(6);
-		shipCoordinates.setY2(6);
-		Ship ship2 = new Submarine(shipCoordinates);
+		ShipCoordinates shipCoordinates2 = new ShipCoordinates(5, 6, 6, 6);
+		Ship ship2 = new Submarine(shipCoordinates2);
 		assertEquals(false, testPlayer.addShip(ship2));
 	}
 
 	@Test
 	public void testAddShipsNextToEachOther() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(5);
-		shipCoordinates.setX2(6);
-		shipCoordinates.setY1(5);
-		shipCoordinates.setY2(5);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(5, 5, 6, 5);
 		Ship ship1 = new Submarine(shipCoordinates);
 		assertEquals(true, testPlayer.addShip(ship1));
 
-		shipCoordinates.setX1(8);
-		shipCoordinates.setX2(8);
-		shipCoordinates.setY1(5);
-		shipCoordinates.setY2(6);
-		Ship ship2 = new Submarine(shipCoordinates);
+		ShipCoordinates shipCoordinates2 = new ShipCoordinates(8, 5, 8, 6);
+		Ship ship2 = new Submarine(shipCoordinates2);
 		assertEquals(true, testPlayer.addShip(ship2));
 	}
 
 	@Test
 	public void testAddSuccessfullTry() {
-		ShotCoordinates shotCoordinates = new ShotCoordinates();
-		shotCoordinates.setX(5);
-		shotCoordinates.setY(5);
+		ShotCoordinates shotCoordinates = new ShotCoordinates(5, 5);
 		Shot shot = new Shot(shotCoordinates);
 
 		char[][] shipPositions = testPlayer.getShipPositions().getPositionOfShips();
@@ -90,31 +71,25 @@ public class TestPlayer {
 
 	@Test
 	public void testAddTryNoHit() {
-		ShotCoordinates shotCoordinates = new ShotCoordinates();
-		shotCoordinates.setX(9);
-		shotCoordinates.setY(9);
+		ShotCoordinates shotCoordinates = new ShotCoordinates(9, 9);
 		Shot shot = new Shot(shotCoordinates);
-		
+
 		testPlayer.addTry(shot);
 		char[][] result = testPlayer.getBattlefieldDuringGame().getPlayingField();
 
 		assertEquals('O', result[9][9]);
 	}
-	
+
 	@Test
 	public void testAddTryTriedAlready() {
-		Player testPlayer = new Player("TestPlayer", null, null);
-		
-		ShotCoordinates shotCoordinates = new ShotCoordinates();
-		shotCoordinates.setX(5);
-		shotCoordinates.setY(5);
+		ShotCoordinates shotCoordinates = new ShotCoordinates(5, 5);
 		Shot shot = new Shot(shotCoordinates);
-		
+
 		char[][] result = testPlayer.getBattlefieldDuringGame().getPlayingField();
 		result[5][5] = 'X';
 		testPlayer.getBattlefieldDuringGame().setPlayingField(result);
-		
+
 		assertEquals(false, testPlayer.addTry(shot));
-		
+
 	}
 }

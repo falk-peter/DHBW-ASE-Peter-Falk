@@ -32,11 +32,11 @@ public class InputConsole implements InputInterface {
 	}
 
 	public ShipCoordinates transformShipCoordinates(String input) {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(Character.getNumericValue(input.charAt(0)));
-		shipCoordinates.setY1(Character.getNumericValue(input.charAt(2)));
-		shipCoordinates.setX2(Character.getNumericValue(input.charAt(4)));
-		shipCoordinates.setY2(Character.getNumericValue(input.charAt(6)));
+		int x1 = (Character.getNumericValue(input.charAt(0)));
+		int y1 = (Character.getNumericValue(input.charAt(2)));
+		int x2 = (Character.getNumericValue(input.charAt(4)));
+		int y2 = (Character.getNumericValue(input.charAt(6)));
+		ShipCoordinates shipCoordinates = new ShipCoordinates(x1, y1, x2, y2);
 
 		return shipCoordinates;
 	} 
@@ -53,13 +53,13 @@ public class InputConsole implements InputInterface {
 	}
 
 	public ShotCoordinates transformShotCoordinates(String input) {
-		ShotCoordinates shotCoordinates = new ShotCoordinates();
-		shotCoordinates.setX(Character.getNumericValue(input.charAt(0)));
-		shotCoordinates.setY(Character.getNumericValue(input.charAt(2)));
+		int x = Character.getNumericValue(input.charAt(0));
+		int y = Character.getNumericValue(input.charAt(2));
+		ShotCoordinates shotCoordinates = new ShotCoordinates(x, y);
 
 		return shotCoordinates;
 	}
-
+ 
 	public Scanner getScanner() {
 		return scanner;
 	}

@@ -28,11 +28,7 @@ public class TestGame {
 	
 	@Test
 	public void testSetUpShip() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(0);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY2(0);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
 		boolean testMethod = testGame.setUpShip(ship, testPlayer);
@@ -44,11 +40,7 @@ public class TestGame {
 
 	@Test
 	public void testSetUpShipFailTooBig() {
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(0);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setX2(2);
-		shipCoordinates.setY2(0);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 2, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
 		assertEquals(false, testGame.setUpShip(ship, testPlayer));
@@ -60,11 +52,7 @@ public class TestGame {
 		blockedFields[0][0] = true;
 		testPlayer.getShipPositions().setBlockedFields(blockedFields);
 
-		ShipCoordinates shipCoordinates = new ShipCoordinates();
-		shipCoordinates.setX1(0);
-		shipCoordinates.setY1(0);
-		shipCoordinates.setX2(1);
-		shipCoordinates.setY2(0);
+		ShipCoordinates shipCoordinates = new ShipCoordinates(0, 0, 1, 0);
 		Ship ship = new Submarine(shipCoordinates);
 
 		assertEquals(false, testGame.setUpShip(ship, testPlayer));
