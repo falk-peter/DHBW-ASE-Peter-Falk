@@ -71,7 +71,7 @@ public class Game {
 		player.getShipPositions().print();
 
 		while (!successfullSetUp) {
-			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
+			output.askForShipCoordinates();
 			Battleship battleship = new Battleship(input.getCoordinatesForShip());
 			successfullSetUp = setUpShip(battleship, player);
 		}
@@ -80,7 +80,7 @@ public class Game {
 
 		output.printLine("Now, set up one cruiser with a size of four blocks!");
 		while (!successfullSetUp) {
-			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
+			output.askForShipCoordinates();
 			Cruiser cruiser = new Cruiser(input.getCoordinatesForShip());
 			successfullSetUp = setUpShip(cruiser, player);
 		}
@@ -116,7 +116,7 @@ public class Game {
 		int numberOfDestroyers = 0;
 
 		while (numberOfDestroyers < 2) {
-			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
+			output.askForShipCoordinates();
 			Destroyer destroyer = new Destroyer(input.getCoordinatesForShip());
 			if (setUpShip(destroyer, player))
 				numberOfDestroyers++;
@@ -129,7 +129,7 @@ public class Game {
 		int numberOfSubmarines = 0;
 
 		while (numberOfSubmarines < 2) {
-			output.printLine("Enter the desired coordinates in format: startX startY endX endY");
+			output.askForShipCoordinates();
 			Submarine submarine = new Submarine(input.getCoordinatesForShip());
 			if (setUpShip(submarine, player))
 				numberOfSubmarines++;
@@ -183,7 +183,7 @@ public class Game {
 	public void endGame() {
 		output.printLine("The game is over!");
 		String winner;
-
+ 
 		if (playersTurn == 'A')
 			winner = playerA.getName();
 		else
