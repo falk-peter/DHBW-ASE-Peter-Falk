@@ -1,12 +1,17 @@
 package application;
 
 import domain.Battleship;
+import domain.BattleshipFactory;
 import domain.Cruiser;
+import domain.CruiserFactory;
 import domain.Destroyer;
+import domain.DestroyerFactory;
 import domain.Ship;
+import domain.ShipFactory;
 import domain.Shot;
 import domain.ShotCoordinates;
 import domain.Submarine;
+import domain.SubmarineFactory;
 import interfaces.InputInterface;
 import interfaces.OutputInterface;
 import interfaces.VisualBattlefieldInterface;
@@ -81,23 +86,31 @@ public class Game {
 
 	public void setUpBattleshipFor(Player player) {
 		output.askForShipCoordinates();
-		Battleship battleship = new Battleship(input.getCoordinatesForShip());
+		
+		BattleshipFactory shipFactory = new BattleshipFactory();
+		Battleship battleship = shipFactory.createShip(input.getCoordinatesForShip());
+		
 		if (!tryAddShipToPlayer(battleship, player))
 			setUpBattleshipFor(player);
 	}
 
 	public void setUpCruiserFor(Player player) {
 		output.askForShipCoordinates();
-		Cruiser cruiser = new Cruiser(input.getCoordinatesForShip());
+		
+		CruiserFactory shipFactory = new CruiserFactory();
+		Cruiser cruiser = shipFactory.createShip(input.getCoordinatesForShip());
+		
 		if (!tryAddShipToPlayer(cruiser, player))
 			setUpBattleshipFor(player);
 	}
 	
 	public void setUpDestroyersFor(Player player) {
 		int numberOfDestroyers = 0;
+		DestroyerFactory shipFactory = new DestroyerFactory();
+		
 		while (numberOfDestroyers < 2) {
 			output.askForShipCoordinates();
-			Destroyer destroyer = new Destroyer(input.getCoordinatesForShip());
+			Destroyer destroyer = shipFactory.createShip(input.getCoordinatesForShip());
 			if (tryAddShipToPlayer(destroyer, player))
 				numberOfDestroyers++;
 		}
@@ -105,9 +118,11 @@ public class Game {
 	
 	public void setUpSubmarinesFor(Player player) {
 		int numberOfSubmarines = 0;
+		SubmarineFactory shipFactory = new SubmarineFactory();
+		
 		while (numberOfSubmarines < 2) {
 			output.askForShipCoordinates();
-			Submarine submarine = new Submarine(input.getCoordinatesForShip());
+			Submarine submarine = shipFactory.createShip(input.getCoordinatesForShip());
 			if (tryAddShipToPlayer(submarine, player))
 				numberOfSubmarines++;
 		}
