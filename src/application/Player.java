@@ -27,17 +27,20 @@ public class Player {
 	}
 
 	public boolean addTry(Shot shot) {
-		if (battlefieldDuringGame.alreadyTried(shot.getX(), shot.getY())) {
+		int x = shot.getX();
+		int y = shot.getY();
+		
+		if (battlefieldDuringGame.alreadyTried(x, y)) {
 			return false;
 		}
 
-		if (shipPositions.isHit(shot.getX(), shot.getY())) {
-			battlefieldDuringGame.updateWithShot(shot.getX(), shot.getY(), 'X');
-		} else {
-			battlefieldDuringGame.updateWithShot(shot.getX(), shot.getY(), 'O');
-		}
-
+		handleShotResult(x, y);
 		return true;
+	}
+	
+	public void handleShotResult(int x, int y) {
+		char result = shipPositions.isHit(x, y) ? 'X':'O';
+		battlefieldDuringGame.updateWithShot(x, y, result);
 	}
 
 	public boolean allShipsDestroyed() {
