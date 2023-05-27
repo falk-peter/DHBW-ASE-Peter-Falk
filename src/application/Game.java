@@ -7,7 +7,6 @@ import domain.CruiserFactory;
 import domain.Destroyer;
 import domain.DestroyerFactory;
 import domain.Ship;
-import domain.ShipFactory;
 import domain.Shot;
 import domain.ShotCoordinates;
 import domain.Submarine;
@@ -48,14 +47,14 @@ public class Game {
 		startGame();
 	}
 
-	public void setUpPlayersWithNames() {
+	protected void setUpPlayersWithNames() {
 		output.printLine("Enter your name Player A:");
 		playerA.setName(input.getName());
 		output.printLine("Enter your name Player B:");
 		playerB.setName(input.getName());
 	}
 
-	public void setUpShipsForBothPlayers() {
+	protected void setUpShipsForBothPlayers() {
 		output.printLine("Alright! Let's continue with setting up your fleets! " + playerA.getName() + " is starting! "
 				+ playerB.getName() + " should not look at the screen!");
 		setUpShipsFor(playerA);
@@ -69,7 +68,7 @@ public class Game {
 		output.clear();
 	}
 
-	public void setUpShipsFor(Player player) {
+	protected void setUpShipsFor(Player player) {
 		player.getShipPositions().print();
 		output.printLine("First, place a battleship with a size of five blocks!");
 		setUpBattleshipFor(player);
@@ -84,7 +83,7 @@ public class Game {
 		setUpSubmarinesFor(player);
 	}
 
-	public void setUpBattleshipFor(Player player) {
+	protected void setUpBattleshipFor(Player player) {
 		output.askForShipCoordinates();
 		
 		BattleshipFactory shipFactory = new BattleshipFactory();
@@ -94,7 +93,7 @@ public class Game {
 			setUpBattleshipFor(player);
 	}
 
-	public void setUpCruiserFor(Player player) {
+	protected void setUpCruiserFor(Player player) {
 		output.askForShipCoordinates();
 		
 		CruiserFactory shipFactory = new CruiserFactory();
@@ -104,7 +103,7 @@ public class Game {
 			setUpBattleshipFor(player);
 	}
 	
-	public void setUpDestroyersFor(Player player) {
+	protected void setUpDestroyersFor(Player player) {
 		int numberOfDestroyers = 0;
 		DestroyerFactory shipFactory = new DestroyerFactory();
 		
@@ -116,7 +115,7 @@ public class Game {
 		}
 	}
 	
-	public void setUpSubmarinesFor(Player player) {
+	protected void setUpSubmarinesFor(Player player) {
 		int numberOfSubmarines = 0;
 		SubmarineFactory shipFactory = new SubmarineFactory();
 		
@@ -128,20 +127,16 @@ public class Game {
 		}
 	}
 
-	public boolean tryAddShipToPlayer(Ship ship, Player player) {
+	protected boolean tryAddShipToPlayer(Ship ship, Player player) {
 		if (!ship.sizeCorrect()) {
 			output.printLine("Error: Wrong size! Try again!");
 			return false;
 		}
 
-		if (!player.getShipPositions().isBlocked(ship)) {
-			player.addShip(ship);
-			return true;
-		} else
-			return false;
+		return player.addShip(ship);
 	}
 
-	public void startGame() {
+	protected void startGame() {
 		playersTurn = determineWhoStarts(Math.random(), Math.random());
 		boolean gameFinished = false;
 
@@ -166,7 +161,7 @@ public class Game {
 		endGame();
 	}
 
-	public void commitTurnOn(Player player) {
+	protected void commitTurnOn(Player player) {
 		player.getBattlefieldDuringGame().print();
 
 		boolean successfullTurn = false;
@@ -183,7 +178,7 @@ public class Game {
 		}
 	}
 
-	public void endGame() {
+	protected void endGame() {
 		output.printLine("The game is over!");
 		String winner;
 
@@ -195,21 +190,21 @@ public class Game {
 		output.printLine("Congratulation " + winner + "! You have won!");
 	}
 
-	public boolean gameIsOver() {
+	protected boolean gameIsOver() {
 		if (playersTurn == 'A')
 			return playerB.allShipsDestroyed();
 		else
 			return playerA.allShipsDestroyed();
 	}
 
-	public void changeTurn() {
+	protected void changeTurn() {
 		if (playersTurn == 'A')
 			playersTurn = 'B';
 		else
 			playersTurn = 'A';
 	}
 
-	public char determineWhoStarts(double numberForA, double numberForB) {
+	protected char determineWhoStarts(double numberForA, double numberForB) {
 		if (numberForA > numberForB)
 			return 'A';
 		else

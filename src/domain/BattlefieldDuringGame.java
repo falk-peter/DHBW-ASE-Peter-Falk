@@ -20,7 +20,7 @@ public class BattlefieldDuringGame {
 		initialize();
 	}
 
-	public void initialize() {
+	private void initialize() {
 		for (int y = 0; y < yAxis; y++) {
 			for (int x = 0; x < xAxis; x++) {
 				playingField[y][x] = '~';

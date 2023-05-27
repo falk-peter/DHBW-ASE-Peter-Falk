@@ -31,7 +31,7 @@ public class InputConsole implements InputInterface {
 		}
 	}
 
-	public ShipCoordinates transformShipCoordinates(String input) {
+	protected ShipCoordinates transformShipCoordinates(String input) {
 		int x1 = (Character.getNumericValue(input.charAt(0)));
 		int y1 = (Character.getNumericValue(input.charAt(2)));
 		int x2 = (Character.getNumericValue(input.charAt(4)));
@@ -52,7 +52,7 @@ public class InputConsole implements InputInterface {
 		}
 	}
 
-	public ShotCoordinates transformShotCoordinates(String input) {
+	protected ShotCoordinates transformShotCoordinates(String input) {
 		int x = Character.getNumericValue(input.charAt(0));
 		int y = Character.getNumericValue(input.charAt(2));
 		ShotCoordinates shotCoordinates = new ShotCoordinates(x, y);

@@ -16,7 +16,7 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		initialize();
 	}
 
-	public void initialize() {
+	private void initialize() {
 		initializeSize();
 		initializeStarBorders();
 		initializeAxisDescription();
@@ -25,7 +25,7 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		initializeWater();
 	}
 
-	public void initializeSize() {
+	private void initializeSize() {
 		for (int y = 0; y < yAxis; y++) {
 			for (int x = 0; x < xAxis; x++) {
 				visualPlayingField[y][x] = ' ';
@@ -33,7 +33,7 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		}
 	}
 
-	public void initializeStarBorders() {
+	private void initializeStarBorders() {
 		for (int x = 0; x < xAxis; x = x + 2) {
 			visualPlayingField[0][x] = STAR;
 		}
@@ -51,12 +51,12 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		}
 	}
 
-	public void initializeAxisDescription() {
+	private void initializeAxisDescription() {
 		visualPlayingField[1][15] = 'x';
 		visualPlayingField[8][2] = 'y';
 	}
 
-	public void initializeXAxis() {
+	private void initializeXAxis() {
 		int axisNumber = 0;
 		for (int x = 6; x < 25; x = x + 2) {
 			visualPlayingField[2][x] = (char) (axisNumber + '0');
@@ -64,7 +64,7 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		}
 	}
 
-	public void initializeYAxis() {
+	private void initializeYAxis() {
 		int axisNumber = 0;
 		for (int y = 3; y < 13; y++) {
 			visualPlayingField[y][4] = (char) (axisNumber + '0');
@@ -72,7 +72,7 @@ public class VisualBattlefieldDuringGame implements VisualBattlefieldInterface{
 		}
 	}
 
-	public void initializeWater() {
+	private void initializeWater() {
 		for (int y = 3; y < 13; y++) {
 			for (int x = 6; x < 25; x = x + 2) {
 				visualPlayingField[y][x] = WATER;

@@ -54,11 +54,11 @@ public class InputChecker {
 		return true;
 	}
 
-	public boolean checkLength(String input, int expectedLength) {
+	protected boolean checkLength(String input, int expectedLength) {
 		return (input.length() == expectedLength);
 	}
 
-	public boolean checkFormatInput(String input) {
+	protected boolean checkFormatInput(String input) {
 		for (int i = 1; i <= input.length() - 2; i = i + 2) {
 			if (!(input.charAt(i) == ' '))
 				return false;
@@ -67,7 +67,7 @@ public class InputChecker {
 		return true;
 	}
 
-	public boolean checkNumeric(String input) {
+	protected boolean checkNumeric(String input) {
 		for (int i = 0; i <= input.length() - 1; i = i + 2) {
 			char c = input.charAt(i);
 			if (!(String.valueOf(c).matches("[0-9]")))
@@ -77,7 +77,7 @@ public class InputChecker {
 		return true;
 	}
 
-	public boolean checkInLine(String input) {
+	protected boolean checkInLine(String input) {
 		int x1 = Character.getNumericValue(input.charAt(0));
 		int y1 = Character.getNumericValue(input.charAt(2));
 		int x2 = Character.getNumericValue(input.charAt(4));
@@ -90,7 +90,7 @@ public class InputChecker {
 		return false;
 	}
 
-	public boolean checkOrder(String input) {
+	protected boolean checkOrder(String input) {
 		int x1 = Character.getNumericValue(input.charAt(0));
 		int y1 = Character.getNumericValue(input.charAt(2));
 		int x2 = Character.getNumericValue(input.charAt(4));

@@ -38,7 +38,7 @@ public class Player {
 		return true;
 	}
 	
-	public void handleShotResult(int x, int y) {
+	protected void handleShotResult(int x, int y) {
 		char result = shipPositions.isHit(x, y) ? 'X':'O';
 		battlefieldDuringGame.updateWithShot(x, y, result);
 	}
